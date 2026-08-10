@@ -1,0 +1,7 @@
+node_modules/
+.usdz-build/
+.usdz-build-model/
+# Original supplied model — large, not needed by the live page (only the
+# converted assets/model.glb + model.usdz are served). Kept locally only.
+assets/source/
+.DS_Store
