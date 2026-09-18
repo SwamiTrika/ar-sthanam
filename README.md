@@ -72,7 +72,7 @@ box there and export, replacing `assets/model.usdz`. Everything else
 | `index.html` | Primary page — `model-viewer` + AR button |
 | `assets/model.usdz` | iOS Quick Look model, image-anchored to `marker.png` |
 | `assets/model.glb` | Android Scene Viewer model |
-| `assets/marker.png` | Placeholder marker artwork — **print this at exactly 7in × 7in** |
+| `assets/marker.png` | Card artwork (cropped/resized from `assets/source/marker-source.jpg`) — **print this at exactly 7in × 7in** |
 | `assets/marker.mind` | Compiled MindAR tracking data (used only by `legacy/`) |
 | `scripts/gen_marker.py` | Regenerates `marker.png` |
 | `assets/source/sthanam.glb` | Original supplied model — source of truth for the conversion below |
@@ -80,17 +80,21 @@ box there and export, replacing `assets/model.usdz`. Everything else
 | `scripts/gen_usdz.py` | Original box-only usdz builder — reference/fallback, superseded by `convert_glb.py` |
 | `scripts/gen_glb.mjs` | Original box-only glb builder — reference/fallback, superseded by `convert_glb.py` |
 | `scripts/compile-marker.mjs` | Compiles a marker PNG into a `.mind` file (legacy only) |
+| `scripts/prepare_marker_from_source.py` | Center-crops + resizes `assets/source/marker-source.jpg` to the 7in @ 300dpi spec |
+| `assets/source/marker-source.jpg` | Original supplied card artwork before crop/resize |
 | `legacy/` | The original in-page MindAR camera experience |
 
 ## Printing the card
 
 Print `assets/marker.png` at **exactly 7in × 7in** (300 DPI, no
-scale-to-fit). Black & white is fine — MindAR (used by `legacy/`)
-converts to grayscale anyway, and `marker.png` is already pure
-black/white/gray for that reason. The iOS anchoring in `model.usdz`
-references this same file and its physical width (in `gen_usdz.py`), so
-if you print at a different size, update `MARKER_WIDTH_M` there and
-regenerate.
+scale-to-fit) — full color, this is now the branded gold-on-maroon card
+art (was a generated placeholder in earlier versions). Note: it's fairly
+vertically symmetric with soft gradients rather than sharp edges, which
+can track a little less robustly than a high-contrast asymmetric marker
+— worth keeping an eye on during testing. The iOS anchoring in
+`model.usdz` references this same file and its physical width (set in
+`convert_glb.py`'s `MARKER_WIDTH_M`), so if you print at a different
+size, update that and regenerate via `scripts/convert_glb.py`.
 
 ## Testing locally
 
